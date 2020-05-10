@@ -6,7 +6,9 @@
 
 λ hwid_generation.exe
 
-string: American Megatrends Inc.5.11HUANANZHIX99-TFSamsung18059AB3M393B2G70DB0-CMA  Samsung180A9342M393B2G70DB0-CMA  Samsung1805214CM393B2G70DB0-CMA  Samsung18059A7BM393B2G70DB0-CMA  IntelIntel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz198386
-hwid sha256: f6b4ca11d25585f36bd0e0acb5e857e312a51b259b0b00495f7a599f35d73d78
+{"baseboard_info":{"manufacturer_name":"HUANANZHI","product_name":"X99-TF"},"bios_info":{"release_date":"10/28/2019","vendor":"American Megatrends Inc.","version":"5.11"},"memory_device":[{"manufacturer":"Samsung","part_number":"M393B2G70DB0-CMA","serial_number":"18059AB3"},{"manufacturer":"Samsung","part_number":"M393B2G70DB0-CMA","serial_number":"180A9342"},{"manufacturer":"Samsung","part_number":"M393B2G70DB0-CMA","serial_number":"1805214C"},{"manufacturer":"Samsung","part_number":"M393B2G70DB0-CMA","serial_number":"18059A7B"}],"processor_info":{"cores":"12","id":"198386","manufacturer":"Intel","socket_designation":"SOCKET 0","threads":"24","type":"Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz"}}
+
+0086ba868bfbc7219958e9aeba917e343479265589402b950bd6955dab33baa0
+
   
  ```
