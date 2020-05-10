@@ -112,21 +112,21 @@ int main()
 			}
 			break;
 
-		case types::memory_device:
-			{
-				auto* const x = reinterpret_cast<mem_device*>(header);
+		//case types::memory_device:
+		//	{
+		//		auto* const x = reinterpret_cast<mem_device*>(header);
 
-				if (x->total_width == 0)
-					break;
-				//TODO: bad code
-				// [header->handle]
-				json_hwid["memory_device"][header->handle]["manufacturer"] = strings[x->manufacturer];
-				json_hwid["memory_device"][header->handle]["serial_number"] = strings[x->serial_number];
-				auto* const part_number = strings[x->part_number];
-				std::string part_number_str(part_number);
-				json_hwid["memory_device"][header->handle]["part_number"] = trim(part_number_str);
-			}
-			break;
+		//		if (x->total_width == 0)
+		//			break;
+		//		//TODO: bad code
+		//		// [header->handle]
+		//		json_hwid["memory_device"][header->handle]["manufacturer"] = strings[x->manufacturer];
+		//		json_hwid["memory_device"][header->handle]["serial_number"] = strings[x->serial_number];
+		//		auto* const part_number = strings[x->part_number];
+		//		std::string part_number_str(part_number);
+		//		json_hwid["memory_device"][header->handle]["part_number"] = trim(part_number_str);
+		//	}
+		//	break;
 		case types::processor_info:
 			{
 				auto* const x = reinterpret_cast<proc_info*>(header);
@@ -143,17 +143,17 @@ int main()
 					json_hwid["processor_info"]["l3"] = std::to_string(static_cast<word_t>(x->l3));
 					json_hwid["processor_info"]["characteristics"] = std::to_string(static_cast<word_t>(x->characteristics));*/
 
-				json_hwid["processor_info"]["socket_designation"] = strings[x->socket_designation];
+				json_hwid["processor_info"][header->handle]["socket_designation"] = strings[x->socket_designation];
 
-				json_hwid["processor_info"]["manufacturer"] = strings[x->manufacturer];
-				json_hwid["processor_info"]["version"] = strings[x->version];
-				json_hwid["processor_info"]["id"] = std::to_string(static_cast<long>(x->id));
+				json_hwid["processor_info"][header->handle]["manufacturer"] = strings[x->manufacturer];
+				json_hwid["processor_info"][header->handle]["version"] = strings[x->version];
+				json_hwid["processor_info"][header->handle]["id"] = std::to_string(static_cast<long>(x->id));
 				//json_hwid["processor_info"]["voltage"] = std::to_string(static_cast<byte_t>(x->voltage));
 				//json_hwid["processor_info"]["status"] = std::to_string(static_cast<byte_t>(x->status));
 
-				json_hwid["processor_info"]["cores"] = std::to_string(static_cast<long>(x->cores));
+				json_hwid["processor_info"][header->handle]["cores"] = std::to_string(static_cast<long>(x->cores));
 				//json_hwid["processor_info"]["cores_enabled"] = std::to_string(static_cast<long>(x->cores_enabled));
-				json_hwid["processor_info"]["threads"] = std::to_string(static_cast<long>(x->threads));
+				json_hwid["processor_info"][header->handle]["threads"] = std::to_string(static_cast<long>(x->threads));
 			}
 			break;
 
