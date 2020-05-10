@@ -1,7 +1,7 @@
 #include <ctime>
 #include <iostream>
 #include <string>
-#include <windows.h>
+#include <Windows.h>
 
 #include "picosha2.h"
 #include "smbios.hpp"
