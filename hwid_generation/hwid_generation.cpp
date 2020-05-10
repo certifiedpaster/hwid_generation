@@ -81,8 +81,8 @@ int main()
 
 				if (x->length == 0)
 					break;
-				json_hwid["baseboard_info"]["manufacturer_name"] = strings[x->manufacturer_name];
-				json_hwid["baseboard_info"]["product_name"] = strings[x->product_name];
+				json_hwid["baseboard_info"][header->handle]["manufacturer_name"] = strings[x->manufacturer_name];
+				json_hwid["baseboard_info"][header->handle]["product_name"] = strings[x->product_name];
 				//json_hwid["baseboard_info"]["version"] = strings[x->version];
 				//json_hwid["baseboard_info"]["serial_number"] = strings[x->serial_number];
 				//json_hwid["baseboard_info"]["product"] = strings[x->product];
@@ -97,10 +97,10 @@ int main()
 
 				if (x->length == 0)
 					break;
-				json_hwid["bios_info"]["vendor"] = strings[x->vendor];
-				json_hwid["bios_info"]["version"] = strings[x->version];
+				json_hwid["bios_info"][header->handle]["vendor"] = strings[x->vendor];
+				json_hwid["bios_info"][header->handle]["version"] = strings[x->version];
 				//json_hwid["bios_info"]["starting_segment"] = std::to_string(static_cast<word_t>(x->starting_segment));
-				json_hwid["bios_info"]["release_date"] = strings[x->release_date];
+				json_hwid["bios_info"][header->handle]["release_date"] = strings[x->release_date];
 				//json_hwid["bios_info"]["rom_size"] = std::to_string(static_cast<byte_t>(x->rom_size));
 				//json_hwid["bios_info"]["characteristics"] = std::to_string(static_cast<qword_t>(x->characteristics));
 				//json_hwid["bios_info"]["ext_char1"] = std::to_string(static_cast<byte_t>(x->ext_char1));
@@ -112,21 +112,21 @@ int main()
 			}
 			break;
 
-		//case types::memory_device:
-		//	{
-		//		auto* const x = reinterpret_cast<mem_device*>(header);
+		case types::memory_device:
+			{
+				auto* const x = reinterpret_cast<mem_device*>(header);
 
-		//		if (x->total_width == 0)
-		//			break;
-		//		//TODO: bad code
-		//		// [header->handle]
-		//		json_hwid["memory_device"][header->handle]["manufacturer"] = strings[x->manufacturer];
-		//		json_hwid["memory_device"][header->handle]["serial_number"] = strings[x->serial_number];
-		//		auto* const part_number = strings[x->part_number];
-		//		std::string part_number_str(part_number);
-		//		json_hwid["memory_device"][header->handle]["part_number"] = trim(part_number_str);
-		//	}
-		//	break;
+				if (x->total_width == 0)
+					break;
+				json_hwid["memory_device"][header->handle]["device_locator"] = strings[x->device_locator];
+				json_hwid["memory_device"][header->handle]["bank_locator"] = strings[x->bank_locator];
+				json_hwid["memory_device"][header->handle]["size"] = std::to_string(static_cast<word_t>(x->size));
+				//json_hwid["memory_device"][header->handle]["serial_number"] = strings[x->serial_number];
+				//auto* const part_number = strings[x->part_number];
+				//std::string part_number_str(part_number);
+				//json_hwid["memory_device"][header->handle]["part_number"] = trim(part_number_str);
+			}
+			break;
 		case types::processor_info:
 			{
 				auto* const x = reinterpret_cast<proc_info*>(header);
