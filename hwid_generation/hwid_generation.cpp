@@ -134,7 +134,7 @@ int main()
 				if (x->length == 0)
 					break;
 
-				json_hwid["processor_info"]["type"] = strings[x->type];
+				//json_hwid["processor_info"]["type"] = strings[x->type];
 				/*	json_hwid["processor_info"]["clock"] = std::to_string(static_cast<word_t>(x->clock));
 					json_hwid["processor_info"]["speed_max"] = std::to_string(static_cast<word_t>(x->speed_max));
 					json_hwid["processor_info"]["speed_cur"] = std::to_string(static_cast<word_t>(x->speed_cur));
@@ -146,7 +146,7 @@ int main()
 				json_hwid["processor_info"]["socket_designation"] = strings[x->socket_designation];
 
 				json_hwid["processor_info"]["manufacturer"] = strings[x->manufacturer];
-				//json_hwid["processor_info"]["version"] = strings[x->version];
+				json_hwid["processor_info"]["version"] = strings[x->version];
 				json_hwid["processor_info"]["id"] = std::to_string(static_cast<long>(x->id));
 				//json_hwid["processor_info"]["voltage"] = std::to_string(static_cast<byte_t>(x->voltage));
 				//json_hwid["processor_info"]["status"] = std::to_string(static_cast<byte_t>(x->status));
