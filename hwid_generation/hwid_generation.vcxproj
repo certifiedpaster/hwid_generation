@@ -157,6 +157,7 @@
     <ClCompile Include="hwid_generation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="contrib\nlohmann\json.hpp" />
     <ClInclude Include="picosha2.h" />
     <ClInclude Include="smbios.hpp" />
   </ItemGroup>

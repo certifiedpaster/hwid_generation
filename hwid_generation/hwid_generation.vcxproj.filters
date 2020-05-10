@@ -26,5 +26,8 @@
     <ClInclude Include="smbios.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="contrib\nlohmann\json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

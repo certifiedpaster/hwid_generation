@@ -1,12 +1,16 @@
 #include <ctime>
 #include <iostream>
 #include <string>
+
+#define NOMINMAX
 #include <Windows.h>
 
-#include "picosha2.h"
+#include "contrib/okdshin/picosha2.h"
+#include "contrib/nlohmann/json.hpp"
 #include "smbios.hpp"
 
 using namespace smbios;
+using json = nlohmann::json;
 
 int main()
 {
@@ -37,7 +41,7 @@ int main()
 	meta.feed(buff, buff_size);
 
 	std::string hardware;
-
+	json json_hwid;
 	for (auto& header : meta.headers)
 	{
 		string_array_t strings;
@@ -51,9 +55,8 @@ int main()
 
 				if (x->length == 0)
 					break;
-
-				hardware.append(strings[x->manufacturer_name]);
-				hardware.append(strings[x->product_name]);
+				json_hwid["baseboard_info"]["manufacturer_name"] = strings[x->manufacturer_name];
+				json_hwid["baseboard_info"]["product_name"] = strings[x->product_name];
 			}
 			break;
 
@@ -63,8 +66,8 @@ int main()
 
 				if (x->length == 0)
 					break;
-				hardware.append(strings[x->vendor]);
-				hardware.append(strings[x->version]);
+				json_hwid["bios_info"]["vendor"] = strings[x->vendor];
+				json_hwid["bios_info"]["version"] = strings[x->version];
 			}
 			break;
 
@@ -75,9 +78,9 @@ int main()
 
 				if (x->total_width == 0)
 					break;
-				hardware.append(strings[x->manufacturer]);
-				hardware.append(strings[x->serial_number]);
-				hardware.append(strings[x->part_number]);
+				json_hwid["memory_device"]["manufacturer"] = strings[x->manufacturer];
+				json_hwid["memory_device"]["serial_number"] = strings[x->serial_number];
+				json_hwid["memory_device"]["part_number"] = strings[x->part_number];
 			}
 			break;
 		case types::processor_info:
@@ -86,9 +89,11 @@ int main()
 
 				if (x->length == 0)
 					break;
-				hardware.append(strings[x->manufacturer]);
-				hardware.append(strings[x->version]);
-				hardware.append(std::to_string(static_cast<long>(x->id)));
+				json_hwid["processor_info"]["manufacturer"] = strings[x->manufacturer];
+				json_hwid["processor_info"]["version"] = strings[x->version];
+				json_hwid["processor_info"]["id"] = std::to_string(static_cast<long>(x->id));
+				json_hwid["processor_info"]["cores"] = std::to_string(static_cast<long>(x->cores));
+				json_hwid["processor_info"]["threads"] = std::to_string(static_cast<long>(x->threads));
 			}
 			break;
 
@@ -100,6 +105,7 @@ int main()
 
 	std::string hex_hwid;
 	picosha2::hash256_hex_string(hardware, hex_hwid);
+	std::cout << json_hwid.dump() << std::endl;
 	std::cout << hardware << std::endl;
 	std::cout << hex_hwid << std::endl;
 
