@@ -350,7 +350,7 @@ namespace smbios
 
 	inline byte_t* parser::skip(byte_t* x)
 	{
-		auto ptr = x + reinterpret_cast<header*>(x)->length;
+		auto* ptr = x + reinterpret_cast<header*>(x)->length;
 		size_t len;
 
 		if (*ptr == 0) ptr += 2;
@@ -367,7 +367,7 @@ namespace smbios
 
 	inline header* parser::extract_strings(header* x, string_array_t& a)
 	{
-		auto ptr = reinterpret_cast<byte_t*>(x) + x->length;
+		auto* ptr = reinterpret_cast<byte_t*>(x) + x->length;
 
 		a.clear();
 		a.push_back(nullptr);
@@ -376,7 +376,7 @@ namespace smbios
 		else
 			for (;;)
 			{
-				auto str = reinterpret_cast<char*>(ptr);
+				auto* str = reinterpret_cast<char*>(ptr);
 				const auto len = strlen(str);
 
 				ptr += len + 1;
@@ -399,7 +399,7 @@ namespace smbios
 
 		memcpy(raw_data_, raw_smbios, size);
 
-		auto x = raw_data_;
+		auto* x = raw_data_;
 
 		while (static_cast<size_t>(x - raw_data_) < raw_size_)
 		{
