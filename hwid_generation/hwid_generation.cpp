@@ -100,7 +100,8 @@ int main()
 
 	std::string hex_hwid;
 	picosha2::hash256_hex_string(hardware, hex_hwid);
-	std::cout << hardware;
+	std::cout << hardware << std::endl;
+	std::cout << hex_hwid << std::endl;
 
 	getchar();
 	return 0;
