@@ -8,7 +8,7 @@
 bb0cd1cc084218fa8a318540d9b41299ea7047cd2def39ea69c43297c74b3895
  ```
 
-## Output VMWare
+## VMware
 
 ```
 λ hwid_generation.exe
